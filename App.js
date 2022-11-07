@@ -27,6 +27,7 @@ export default function App() {
   const Tab = createBottomTabNavigator();
 
   
+  
 
   return (
     <View style={styles.container}>
@@ -54,7 +55,9 @@ export default function App() {
           tabBarInactiveTintColor: "gray",
         })}
       >
-        <Tab.Screen name="Home" children={()=><Home app={app}/>} />
+        <Tab.Screen name="Home" children={()=><Home app={app}/>} options={{
+          headerShown: false,
+        }} />
         <Tab.Screen name="ListMenu" children={()=><ListMenu app={app}/>} options={{
           headerShown: false,
         }} />
