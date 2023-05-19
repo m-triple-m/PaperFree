@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, Modal, StyleSheet, Text, View } from "react-native";
 import { Button, Card, Divider, IconButton } from "react-native-paper";
+import CookingFood from "./CookingFood";
 
 const CurrentOrder = ({
   visible,
@@ -8,7 +9,10 @@ const CurrentOrder = ({
   setCurrentOrder,
   currentOrder,
 }) => {
+  const [orderPlaced, setOrderPlaced] = useState(false);
   const displayOrders = () => {
+
+
     return currentOrder.map(({ item, qty }) => {
       return (
         <View style={styles.orderItem} key={item.id}>
@@ -24,7 +28,6 @@ const CurrentOrder = ({
     });
   };
 
-      
 
   return (
     <Modal
@@ -32,6 +35,7 @@ const CurrentOrder = ({
       onRequestClose={(e) => setVisible(false)}
       animationType="slide"
     >
+      <CookingFood visible={orderPlaced} setVisible={setOrderPlaced} />
       <View style={styles.container}>
         <View style={{flex: 3}}>
 
@@ -52,7 +56,7 @@ const CurrentOrder = ({
           <Text style={styles.orderTotalText}>Total</Text>
           <Text style={styles.orderTotalPrice}>₹{currentOrder.reduce((acc, {item, qty}) => acc + (item.obj.price * qty), 0)}</Text>
           </View>
-          <Button color="#fff" style={styles.orderBtn}>PLACE ORDER</Button>
+          <Button color="#fff" style={styles.orderBtn} onPress={e => setOrderPlaced(true)}>PLACE ORDER</Button>
       </View>
 
     </Modal>
